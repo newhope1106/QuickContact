@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FEFEFE"
+    android:orientation="vertical"
+    tools:context="cn.appleye.quickcontact.QuickContactActivity" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:background="#EEEEEE"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:text="@string/contacts_title" />
+
+    <cn.appleye.quickcontact.widget.BorderLinearLayout
+        android:id="@+id/container_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip">
+        
+        <cn.appleye.quickcontact.widget.ClearEditText
+	        android:id="@+id/search_view"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="18sp"
+	        android:paddingTop="8dip"
+	        android:paddingBottom="8dip"
+	        android:paddingLeft="4dip"
+	        android:paddingRight="4dip"
+	        android:layout_marginLeft="4dip"
+	        android:layout_marginRight="4dip"
+	        android:hint="@string/search_hint" />
+    </cn.appleye.quickcontact.widget.BorderLinearLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/generate_contacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/contacts_generate"
+            android:gravity="center|center_horizontal"
+            android:textSize="24sp"/>
+    </RelativeLayout>
+</LinearLayout>
