@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FEFEFE"
+    android:gravity="center|center_vertical|center_horizontal"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/settings_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:background="#EEEEEE"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:text="@string/settings" />
+    <TextView
+        android:id="@+id/slide_generate_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:background="#EEEEEE"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:text="@string/contacts_generate" />
+</LinearLayout>

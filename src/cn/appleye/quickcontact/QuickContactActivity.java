@@ -1,5 +1,7 @@
 package cn.appleye.quickcontact;
 
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
@@ -27,6 +29,9 @@ public class QuickContactActivity extends Activity implements LoaderCallbacks<Cu
 	private View mCreateContactsView;
 	private View mContainerView;
 	
+	private View mSettingsView;
+	private View mSlideGenerateView;
+	
 	private String mLastQueryString = "";
 	
 	private static final int LOADER_ID = 1;
@@ -35,7 +40,7 @@ public class QuickContactActivity extends Activity implements LoaderCallbacks<Cu
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quick_contact);
-		
+
 		mSearchView = (EditText)findViewById(R.id.search_view);
 		
 		mAdapter = new ListAdapter(this);
@@ -44,10 +49,47 @@ public class QuickContactActivity extends Activity implements LoaderCallbacks<Cu
 		mContainerView = findViewById(R.id.container_view);
 		mListView.setEmptyView(mCreateContactsView);
 		
+		mCreateContactsView.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startGenerateActivity();
+			}
+		});
+		
+		setupSlideMenu();
 		setupSearchView();
 		setupListView();
 		
 		startLoading();
+	}
+	
+	private void setupSlideMenu() {
+		SlidingMenu menu = new SlidingMenu(this);
+		menu.setMode(SlidingMenu.LEFT);
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu.setShadowWidthRes(R.dimen.shadow_width);
+        menu.setShadowDrawable(R.drawable.shadow);
+        menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        menu.setFadeDegree(0.35f);
+        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        menu.setMenu(R.layout.slide_menu);
+        
+        mSettingsView = menu.findViewById(R.id.settings_view);
+        mSlideGenerateView = menu.findViewById(R.id.slide_generate_view);
+        
+        mSlideGenerateView.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startGenerateActivity();
+			}
+		});
+	}
+	
+	private void startGenerateActivity() {
+		final Intent intent = new Intent(this, ContactGenerateActivity.class);
+		startActivity(intent);
 	}
 	
 	private void setupSearchView() {

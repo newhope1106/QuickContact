@@ -51,7 +51,12 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
+            android:paddingTop="8dip"
+            android:paddingBottom="8dip"
+            android:paddingLeft="4dip"
+            android:paddingRight="4dip"
             android:text="@string/contacts_generate"
+            android:background="#FFB200"
             android:gravity="center|center_horizontal"
             android:textSize="24sp"/>
     </RelativeLayout>
