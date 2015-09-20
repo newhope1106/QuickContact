@@ -22,7 +22,7 @@
         android:orientation="vertical"
         android:gravity="center_vertical|center_horizontal">
         <RadioGroup 
-            android:id="@+id/radioGroup" 
+            android:id="@+id/radio_group" 
             android:layout_width="match_parent" 
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -59,7 +59,7 @@
             android:orientation="horizontal"
             android:gravity="center_vertical|center_horizontal">
             <CheckBox
-                android:id="@+id/multi_contacts_checkbox"
+                android:id="@+id/multi_numbers_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dip"

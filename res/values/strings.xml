@@ -19,4 +19,7 @@
     
     <string name="ok">OK</string>
     <string name="reset">reset</string>
+    
+    <string name="toast_empty_counts">empty counts not allowed</string>
+    <string name="toast_invalid_number">invalid number</string>
 </resources>
