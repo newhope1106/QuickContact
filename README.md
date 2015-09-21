@@ -12,7 +12,7 @@
 ###依赖
 运行平台：android 4.4及以上
 
-右滑菜单：[SlideMenu](https://github.com/YeXiaoChao/Yc_ui_slidingmenu)
+右滑菜单库：[slidingmenu_library](https://github.com/YeXiaoChao/slidingmenu_library)
 
 使用范例：[http://www.cnblogs.com/yc-755909659/p/4306938.html](http://www.cnblogs.com/yc-755909659/p/4306938.html)
 

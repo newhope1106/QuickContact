@@ -71,13 +71,18 @@ public class ContactGenerateActivity extends Activity{
 					mIsMultiNumberAllowed = mMultiNumberCheckbox.isChecked();
 					mIsSameContactRepeat = mSameRepeatCheckbox.isChecked();
 					
-					startGenerate();
+					startGenerate(countText);
 				}
 			}
 		});
 	}
 	
-	private void startGenerate() {
-		
+	private void startGenerate(String countText) {
+		try{
+			int count = Integer.parseInt(countText);
+			
+		}catch(NumberFormatException nfe) {
+			Toast.makeText(ContactGenerateActivity.this, R.string.toast_invalid_number, Toast.LENGTH_SHORT).show();
+		}
 	}
 }
