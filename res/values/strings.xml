@@ -22,4 +22,10 @@
     
     <string name="toast_empty_counts">empty count not allowed</string>
     <string name="toast_invalid_number">invalid number</string>
+    
+    <string name="loading_dialog_title">generating</string>
+    <string name="loading_dialog_message">please wait.......</string>
+    
+    <string name="message_generate_finish">finish</string>
+    <string name="message_generate_cancel">cancel</string>
 </resources>

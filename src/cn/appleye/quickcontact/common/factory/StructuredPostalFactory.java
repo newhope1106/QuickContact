@@ -1,6 +1,6 @@
 package cn.appleye.quickcontact.common.factory;
 
-public class StructuredPostalFactory {
+public class StructuredPostalFactory implements IFactory{
 	public static String[] sSample = {
 			"深圳市南山区科技园科发路12号",
 			"深圳市龙岗区中心城龙翔大道",
@@ -19,5 +19,42 @@ public class StructuredPostalFactory {
 		String postal = sSample[index];
 		
 		return postal;
+	}
+	
+	public String[] createRandomPostals(int count, boolean allowRepeat) {
+		String[] postals = new String[count];
+		
+		for(int i=0; i<count; i++) {
+			String postal= createRandomSamplePostal();
+			
+			postals[i] = postal;
+			boolean willRepeat = false;
+			if(allowRepeat && i<count-1) {
+				willRepeat = (int)(Math.random()*2)==1;
+			}
+			
+			i++;
+			if (willRepeat) {
+				postals[i] = postal;
+			}
+		}
+		
+		return postals;
+	}
+
+	@Override
+	public String createFirstRandomData() {
+		return createRandomSamplePostal();
+	}
+
+	@Override
+	public String[] createFirstRandomData(int count, boolean repeatAllowed) {
+		return createRandomPostals(count, repeatAllowed);
+	}
+
+	@Override
+	public String createSecondRandomData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

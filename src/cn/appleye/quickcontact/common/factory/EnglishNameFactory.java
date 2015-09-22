@@ -1,6 +1,6 @@
 package cn.appleye.quickcontact.common.factory;
 
-public class EnglishNameFactory {
+public class EnglishNameFactory implements IFactory{
 	private static String[] sSurname= {
 			"Smith","Johnson","Williams","Brown","Jones","Miller","Davis","Garcia","Rodriguez","Wilson",
 			"Martinez","Anderson","Taylor","Thomas","Hernandez","Moore","Martin","Jackson","Thompson",
@@ -135,5 +135,23 @@ public class EnglishNameFactory {
 		String secondName = sSecondNames[index];
 		
 		return secondName;
+	}
+
+	@Override
+	public String createFirstRandomData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[] createFirstRandomData(int count, boolean repeatAllowed) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String createSecondRandomData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

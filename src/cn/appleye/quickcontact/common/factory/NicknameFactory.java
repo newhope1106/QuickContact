@@ -1,6 +1,6 @@
 package cn.appleye.quickcontact.common.factory;
 
-public class NicknameFactory {
+public class NicknameFactory implements IFactory{
 	private static final String[] sNickNames = {
 			"就当风没吹过我没来过","[命里犯贱]","清浅吟唱","抱歉，该昵称无法显示","巴黎铁塔下の那抹樱花","╬═爺ぁ低調☆","木槿昔年",
 			"爱过人渣怪我眼瞎","祢的笑、明媚整个夏天","倾一世丶等一人","易如既往,为你峰狂","要么留、要么滚","世态炎凉狗也猖狂","抹不掉丶迩给俄的温柔",
@@ -31,5 +31,22 @@ public class NicknameFactory {
 		nickName = sNickNames[index];
 		
 		return nickName;
+	}
+
+	@Override
+	public String createFirstRandomData() {
+		return createRandomNickName();
+	}
+
+	@Override
+	public String[] createFirstRandomData(int count, boolean repeatAllowed) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String createSecondRandomData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

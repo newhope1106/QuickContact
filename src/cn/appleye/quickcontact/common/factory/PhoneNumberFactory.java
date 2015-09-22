@@ -1,6 +1,6 @@
 package cn.appleye.quickcontact.common.factory;
 
-public class PhoneNumberFactory {
+public class PhoneNumberFactory implements IFactory{
 	
 	//移动
 	private static String[] sMobile = new String[]{"134","135","136","137","138","139","150","151","157","158","159","187","188"};
@@ -62,5 +62,21 @@ public class PhoneNumberFactory {
 		}
 		
 		return numbers;
+	}
+
+	@Override
+	public String createFirstRandomData() {
+		return createOneRandomPhoneNumber();
+	}
+
+	@Override
+	public String[] createFirstRandomData(int count, boolean repeatAllowed) {
+		return createRandomNumbers(count, repeatAllowed);
+	}
+
+	@Override
+	public String createSecondRandomData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

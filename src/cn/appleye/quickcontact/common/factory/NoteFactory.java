@@ -1,6 +1,6 @@
 package cn.appleye.quickcontact.common.factory;
 
-public class NoteFactory {
+public class NoteFactory implements IFactory{
 	public static String[] sSample = {
 			"愿得一人心，白首不相离《白头吟》",
 			"身无彩凤双飞翼，心有灵犀一点通《无题》",
@@ -197,5 +197,22 @@ public class NoteFactory {
 		String note = sSample[index];
 		
 		return note;
+	}
+
+	@Override
+	public String createFirstRandomData() {
+		return createRandomNote();
+	}
+
+	@Override
+	public String[] createFirstRandomData(int count, boolean repeatAllowed) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String createSecondRandomData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
