@@ -34,6 +34,8 @@ public class QuickContactActivity extends Activity implements LoaderCallbacks<Cu
 	
 	private String mLastQueryString = "";
 	
+	private SlidingMenu mSlideMenu;
+	
 	private static final int LOADER_ID = 1;
 
 	@Override
@@ -65,18 +67,18 @@ public class QuickContactActivity extends Activity implements LoaderCallbacks<Cu
 	}
 	
 	private void setupSlideMenu() {
-		SlidingMenu menu = new SlidingMenu(this);
-		menu.setMode(SlidingMenu.LEFT);
-        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-        menu.setShadowWidthRes(R.dimen.shadow_width);
-        menu.setShadowDrawable(R.drawable.shadow);
-        menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-        menu.setFadeDegree(0.35f);
-        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-        menu.setMenu(R.layout.slide_menu);
+		mSlideMenu = new SlidingMenu(this);
+		mSlideMenu.setMode(SlidingMenu.LEFT);
+		mSlideMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		mSlideMenu.setShadowWidthRes(R.dimen.shadow_width);
+		mSlideMenu.setShadowDrawable(R.drawable.shadow);
+		mSlideMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		mSlideMenu.setFadeDegree(0.35f);
+		mSlideMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+		mSlideMenu.setMenu(R.layout.slide_menu);
         
-        mSettingsView = menu.findViewById(R.id.settings_view);
-        mSlideGenerateView = menu.findViewById(R.id.slide_generate_view);
+        mSettingsView = mSlideMenu.findViewById(R.id.settings_view);
+        mSlideGenerateView = mSlideMenu.findViewById(R.id.slide_generate_view);
         
         mSlideGenerateView.setOnClickListener(new View.OnClickListener() {
 			
@@ -154,6 +156,14 @@ public class QuickContactActivity extends Activity implements LoaderCallbacks<Cu
 		mAdapter.configureLoader(cursorLoader);
 		
 		return cursorLoader;
+	}
+	
+	public void onBackPressed() {
+		if (mSlideMenu.isMenuShowing()) {
+			mSlideMenu.toggle();
+		} else {
+			super.onBackPressed();
+		}
 	}
 
 	@Override

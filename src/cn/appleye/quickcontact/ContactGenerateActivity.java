@@ -19,22 +19,20 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 import cn.appleye.quickcontact.common.model.BaseContactType;
+import cn.appleye.quickcontact.widget.CheckableTextView;
+import cn.appleye.quickcontact.widget.ClickableTextView;
 
 public class ContactGenerateActivity extends Activity implements Callback{
 	private static final String TAG = "ContactGenerateActivity";
 	
-	private RadioGroup mInfoRadioGroup;
-	private RadioButton mSimpleInfoRadio;
-	private RadioButton mFullInfoRadio;
+	private ClickableTextView mSimpleInfoView;
+	private ClickableTextView mFullInfoView;
 	private EditText mCountsView;
-	private CheckBox mMultiNumberCheckbox;
-	private CheckBox mSameRepeatCheckbox;
+	private CheckableTextView mMultiNumberCheckbox;
+	private CheckableTextView mSameRepeatCheckbox;
 	private Button mResetBtn;
 	private Button mOKBtn;
 	
@@ -53,13 +51,14 @@ public class ContactGenerateActivity extends Activity implements Callback{
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_generate_contacts);
-		
-		mInfoRadioGroup = (RadioGroup)findViewById(R.id.radio_group);
-		mSimpleInfoRadio = (RadioButton)findViewById(R.id.simple_info_radio);
-		mFullInfoRadio = (RadioButton)findViewById(R.id.full_info_radio);
+
+		mSimpleInfoView = (ClickableTextView)findViewById(R.id.simple_info_view);
+		mSimpleInfoView.setChecked(true);
+		mFullInfoView = (ClickableTextView)findViewById(R.id.full_info_view);
+		mFullInfoView.setChecked(false);
 		mCountsView = (EditText)findViewById(R.id.contacts_count);
-		mMultiNumberCheckbox = (CheckBox)findViewById(R.id.multi_numbers_checkbox);
-		mSameRepeatCheckbox = (CheckBox)findViewById(R.id.same_repeat_checkbox);
+		mMultiNumberCheckbox = (CheckableTextView)findViewById(R.id.multi_numbers_checkbox);
+		mSameRepeatCheckbox = (CheckableTextView)findViewById(R.id.same_repeat_checkbox);
 		mResetBtn = (Button)findViewById(R.id.reset_btn);
 		mOKBtn = (Button)findViewById(R.id.ok_btn);
 		
@@ -71,8 +70,8 @@ public class ContactGenerateActivity extends Activity implements Callback{
 			
 			@Override
 			public void onClick(View v) {
-				mSimpleInfoRadio.setChecked(true);
-				mFullInfoRadio.setChecked(false);
+				mSimpleInfoView.setChecked(true);
+				mFullInfoView.setChecked(false);
 				mCountsView.setText("");
 				mMultiNumberCheckbox.setChecked(false);
 				mSameRepeatCheckbox.setChecked(false);
@@ -90,12 +89,30 @@ public class ContactGenerateActivity extends Activity implements Callback{
 				} else if (!countText.matches("[1-9][0-9]{0,5}")) {
 					Toast.makeText(ContactGenerateActivity.this, R.string.toast_invalid_number, Toast.LENGTH_SHORT).show();
 				} else {
-					mIsSimpleInfo = mSimpleInfoRadio.isChecked();
+					mIsSimpleInfo = mSimpleInfoView.isChecked();
 					mIsMultiNumberAllowed = mMultiNumberCheckbox.isChecked();
 					mIsSameContactRepeat = mSameRepeatCheckbox.isChecked();
 					
 					startGenerate(countText);
 				}
+			}
+		});
+		
+		mSimpleInfoView.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mSimpleInfoView.toggole();
+				mFullInfoView.toggole();
+			}
+		});
+		
+		mFullInfoView.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mSimpleInfoView.toggole();
+				mFullInfoView.toggole();
 			}
 		});
 	}
