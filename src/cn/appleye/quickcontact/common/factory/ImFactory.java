@@ -29,8 +29,8 @@ public class ImFactory implements IFactory{
 				willRepeat = (int)(Math.random()*2)==1;
 			}
 			
-			i++;
 			if (willRepeat) {
+				i++;
 				ims[i] = im;
 			}
 		}

@@ -54,9 +54,9 @@ public class PhoneNumberFactory implements IFactory{
 			if(allowRepeat && i<count-1) {
 				willRepeat = (int)(Math.random()*2)==1;
 			}
-			
-			i++;
+
 			if (willRepeat) {
+				i++;
 				numbers[i] = number;
 			}
 		}
