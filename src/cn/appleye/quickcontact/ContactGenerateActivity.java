@@ -3,7 +3,6 @@ package cn.appleye.quickcontact;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.ContentProviderOperation;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -24,6 +23,7 @@ import android.widget.Toast;
 import cn.appleye.quickcontact.common.model.BaseContactType;
 import cn.appleye.quickcontact.widget.CheckableTextView;
 import cn.appleye.quickcontact.widget.ClickableTextView;
+import cn.appleye.quickcontact.widget.ProgressDialogEx;
 
 public class ContactGenerateActivity extends Activity implements Callback{
 	private static final String TAG = "ContactGenerateActivity";
@@ -40,7 +40,7 @@ public class ContactGenerateActivity extends Activity implements Callback{
 	private boolean mIsMultiNumberAllowed = false;
 	private boolean mIsSameContactRepeat = false;
 	
-	private ProgressDialog mLoadingDialog = null;
+	private ProgressDialogEx mLoadingDialog = null;
 	private boolean mCancel = false;
 	private Handler mMainHandler = new Handler(this);
 	
@@ -70,11 +70,7 @@ public class ContactGenerateActivity extends Activity implements Callback{
 			
 			@Override
 			public void onClick(View v) {
-				mSimpleInfoView.setChecked(true);
-				mFullInfoView.setChecked(false);
-				mCountsView.setText("");
-				mMultiNumberCheckbox.setChecked(false);
-				mSameRepeatCheckbox.setChecked(false);
+				resetItems();
 			}
 		});
 		
@@ -115,6 +111,14 @@ public class ContactGenerateActivity extends Activity implements Callback{
 				mFullInfoView.toggole();
 			}
 		});
+	}
+	
+	private void resetItems() {
+		mSimpleInfoView.setChecked(true);
+		mFullInfoView.setChecked(false);
+		mCountsView.setText("");
+		mMultiNumberCheckbox.setChecked(false);
+		mSameRepeatCheckbox.setChecked(false);
 	}
 	
 	private void startGenerate(String countText) {
@@ -200,11 +204,11 @@ public class ContactGenerateActivity extends Activity implements Callback{
 	
 	private void showLoadingDialog(){
 		if(mLoadingDialog == null){	
-			mLoadingDialog = new ProgressDialog(this);
+			mLoadingDialog = new ProgressDialogEx(this);
 			mLoadingDialog.setTitle(R.string.loading_dialog_title);
 			mLoadingDialog.setMessage(getString(R.string.loading_dialog_message));
 			mLoadingDialog.setCancelable(false);
-			mLoadingDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			mLoadingDialog.setProgressStyle(ProgressDialogEx.STYLE_HORIZONTAL);
 			mLoadingDialog.show();
 			
 		}else if(mLoadingDialog!=null && !mLoadingDialog.isShowing()){
@@ -215,6 +219,14 @@ public class ContactGenerateActivity extends Activity implements Callback{
 	private void dismissLoadingDialog(){
 		if(mLoadingDialog != null && mLoadingDialog.isShowing()){
 			mLoadingDialog.dismiss();
+		}
+	}
+	
+	public void onBackPressed() {
+		if (mLoadingDialog!=null && mLoadingDialog.isShowing()) {
+			mCancel = true;
+		} else {
+			super.onBackPressed();
 		}
 	}
 	
@@ -237,13 +249,15 @@ public class ContactGenerateActivity extends Activity implements Callback{
 	@Override
 	public boolean handleMessage(Message msg) {
 		int what = msg.what;
-		
+
 		if (MESSAGE_GENERATE_SUCCESS == what) {
 			Toast.makeText(this, R.string.message_generate_finish, Toast.LENGTH_SHORT).show();
+			resetItems();
 			dismissLoadingDialog();
 			return true;
 		} else if (MESSAGE_GENERATE_FAILED == what) {
 			Toast.makeText(this, R.string.message_generate_cancel, Toast.LENGTH_SHORT).show();
+			resetItems();
 			dismissLoadingDialog();
 			return true;
 		}
