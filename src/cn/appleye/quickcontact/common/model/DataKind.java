@@ -11,6 +11,8 @@ public class DataKind {
 	
 	public String typeColumn;
 	
+	public String secondTypeColumn;
+	
 	public ArrayList<DataType> typeList;
 	
 	public IFactory factoryHandler;

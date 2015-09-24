@@ -16,6 +16,7 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.provider.ContactsContract.Data;
+import android.text.TextUtils;
 import android.util.Log;
 import cn.appleye.quickcontact.common.factory.ChinseNameFactory;
 import cn.appleye.quickcontact.common.factory.EmailFactory;
@@ -195,7 +196,7 @@ public class BaseContactType {
 		dataKind.mimetype = Organization.CONTENT_ITEM_TYPE;
 		dataKind.columnName = Organization.COMPANY;
 		dataKind.typeColumn = Organization.TYPE;
-		dataKind.typeOverallMax = 2;
+		dataKind.typeOverallMax = 1;
 		
 		dataKind.typeList = new ArrayList<DataType>();
 		DataType dataType = new DataType();
@@ -207,6 +208,8 @@ public class BaseContactType {
 		dataType.type = Organization.TYPE_OTHER;
 		dataType.typeName = "other";
 		dataKind.typeList.add(dataType);
+		
+		dataKind.secondTypeColumn = Organization.TITLE;
 		
 		dataKind.factoryHandler = new OrganizationFactory();
 		mDataKinds.add(dataKind);
@@ -268,6 +271,11 @@ public class BaseContactType {
 					contentValues.put(Data.RAW_CONTACT_ID, rawContactId);
 					contentValues.put(Data.MIMETYPE, dataKind.mimetype);
 					contentValues.put(dataKind.columnName, ifactoryHandler.createFirstRandomData());
+					
+					if (!TextUtils.isEmpty(dataKind.secondTypeColumn)) {
+						contentValues.put(dataKind.secondTypeColumn, ifactoryHandler.createSecondRandomData());
+					}
+					
 					ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(Data.CONTENT_URI);
 					builder.withValues(contentValues);
 					operationList.add(builder.build());
@@ -283,6 +291,11 @@ public class BaseContactType {
 								DataType dataType = dataTypies.get(i);
 								contentValues.put(dataKind.columnName, datas[i]);
 								contentValues.put(dataKind.typeColumn, dataType.type);
+								
+								if (!TextUtils.isEmpty(dataKind.secondTypeColumn)) {
+									contentValues.put(dataKind.secondTypeColumn, ifactoryHandler.createSecondRandomData());
+								}
+								
 								ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(Data.CONTENT_URI);
 								builder.withValues(contentValues);
 								operationList.add(builder.build());

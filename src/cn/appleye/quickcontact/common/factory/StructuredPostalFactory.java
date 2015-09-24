@@ -54,7 +54,6 @@ public class StructuredPostalFactory implements IFactory{
 
 	@Override
 	public String createSecondRandomData() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
