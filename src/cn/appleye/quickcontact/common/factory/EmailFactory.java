@@ -3,7 +3,9 @@ package cn.appleye.quickcontact.common.factory;
 public class EmailFactory implements IFactory{
 	private static String[] sEmailDomain= {
 			"qq.com", "126.com", "163.com", "sina.com", "139.com", 
-			"189.com", "gmail.com", "yahoo.com", "souhu.com", "hotmail.com"
+			"189.com", "gmail.com", "yahoo.com", "souhu.com", "hotmail.com",
+			"msn.com", "163.net", "ask.com", "aol.com", "263.net", "3721.net",
+			"yeah.net", "live.com"
 	};
 	
 	public static String createOneRandomEmail() {

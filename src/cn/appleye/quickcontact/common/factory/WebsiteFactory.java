@@ -2,7 +2,11 @@ package cn.appleye.quickcontact.common.factory;
 
 public class WebsiteFactory implements IFactory{
 	public static String[] sSample = {
-			"www.baidu.com", "www.google.com", "www.yahoo.com", "www.douban.com", "www.youtube"
+			"www.baidu.com", "www.google.com", "www.yahoo.com", "www.douban.com", "www.youtube.com",
+			"www.qq.com", "www.126.com", "www.163.com", "www.sina.com", "www.139.com", 
+			"www.189.com", "www.gmail.com", "www.yahoo.com", "www.souhu.com", "www.hotmail.com",
+			"www.msn.com", "www.163.net", "www.ask.com", "www.aol.com", "www.263.net", "www.3721.net",
+			"www.yeah.net", "www.live.com.cn"
 	};
 	
 	public static String createRandomWebsite() {

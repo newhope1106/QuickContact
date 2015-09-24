@@ -18,6 +18,15 @@ public class ChinseNameFactory implements IFactory{
 	        "张廖","雍门","独孤","北宫"
 	};
 	
+	private static String sGirl="秀娟英华慧巧美娜静淑惠珠翠雅芝玉萍红娥玲芬芳燕彩春菊兰凤洁梅琳素云莲真环"
+			+ "雪荣爱妹霞香月莺媛艳瑞凡佳嘉琼勤珍贞莉桂娣叶璧璐娅琦晶妍茜秋珊莎锦黛青倩婷姣婉娴瑾颖露瑶怡婵雁蓓"
+			+ "纨仪荷丹蓉眉君琴蕊薇菁梦岚苑婕馨瑗琰韵融园艺咏卿聪澜纯毓悦昭冰爽琬茗羽希宁欣飘育滢馥筠柔竹霭凝晓欢"
+			+ "霄枫芸菲寒伊亚宜可姬舒影荔枝思丽 ";  
+    private static String sBoy="伟刚勇毅俊峰强军平保东文辉力明永健世广志义兴良海山仁波宁贵福生龙元全国胜学祥"
+    		+ "才发武新利清飞彬富顺信子杰涛昌成康星光天达安岩中茂进林有坚和彪博诚先敬震振壮会思群豪心邦承乐绍功松"
+    		+ "善厚庆磊民友裕河哲江超浩亮政谦亨奇固之轮翰朗伯宏言若鸣朋斌梁栋维启克伦翔旭鹏泽晨辰士以建家致树炎德"
+    		+ "行时泰盛雄琛钧冠策腾楠榕风航弘";
+	
 	public static String createRandomName() {
 		return getChineseSurname() + getChineseName();
 	}
@@ -31,10 +40,36 @@ public class ChinseNameFactory implements IFactory{
 		return sSurname[index];
 	}
 	
+	public static int getNum(int start,int end) {  
+        return (int)(Math.random()*(end-start+1)+start);  
+    }
+	
 	/**
 	 * 获取随机名
 	 * */
 	private static String getChineseName() {  
+        int sex=getNum(0,1);  
+        String str=sBoy;  
+        int length=sBoy.length();  
+        if(sex==0){  
+            str=sGirl;  
+            length=sGirl.length();  
+        }
+        int index=getNum(0,length-1);  
+        String second=str.substring(index, index+1);  
+        int hasThird=getNum(0,1);  
+        String third="";  
+        if(hasThird==1){  
+            index=getNum(0,length-1);  
+            third=str.substring(index, index+1);  
+        }  
+        return second+third;  
+    }  
+	
+	/**
+	 * 获取随机名
+	 * */
+	/*private static String getChineseName() {  
         String str = null;  
         int highPos, lowPos;  
         Random random = new Random();  
@@ -52,7 +87,7 @@ public class ChinseNameFactory implements IFactory{
         }  
         
         return str;  
-    }
+    }*/
 
 	@Override
 	public String createFirstRandomData() {
