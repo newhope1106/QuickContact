@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">QuickContact</string>
+    <string name="action_settings">设置</string>
+    
+    <string name="contacts_title">联系人</string>
+    <string name="search_hint">搜索关键字</string>
+    <string name="contacts_generate">生成联系人</string>
+    <string name="settings">设置</string>
+    
+    <string name="simple_info">简单信息</string>
+    <string name="full_info">全信息</string>
+    <string name="contacts_count">个数</string>
+    
+    <string name="multi_numbers">多个号码</string>
+    <string name="same_contact_repeat">完全相同联系人</string>
+    
+    <string name="ok">确定</string>
+    <string name="reset">重置</string>
+    
+    <string name="toast_empty_counts">个数不允许为空</string>
+    <string name="toast_invalid_number">非法数字</string>
+    
+    <string name="loading_dialog_title">生成联系人</string>
+    <string name="loading_dialog_message">请稍等.......</string>
+    
+    <string name="message_generate_finish">完成</string>
+    <string name="message_generate_cancel">取消</string>
+</resources>
