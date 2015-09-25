@@ -98,6 +98,35 @@ public class BaseContactType {
 		mDataKinds.add(dataKind);
 	}
 	
+	public void addDataKindPhone(int maxCount) {
+		DataKind dataKind = new DataKind();
+		dataKind.mimetype = Phone.CONTENT_ITEM_TYPE;
+		dataKind.typeOverallMax = maxCount>3 ? 3:maxCount;
+		dataKind.columnName = Phone.NUMBER;
+		dataKind.typeColumn = Phone.TYPE;
+		
+		dataKind.typeList = new ArrayList<DataType>();
+		
+		DataType dataType = new DataType();
+		dataType.type = Phone.TYPE_MOBILE;
+		dataType.typeName = "mobile";
+		dataKind.typeList.add(dataType);
+		
+		dataType = new DataType();
+		dataType.type = Phone.TYPE_HOME;
+		dataType.typeName = "home";
+		dataKind.typeList.add(dataType);
+		
+		dataType = new DataType();
+		dataType.type = Phone.TYPE_WORK;
+		dataType.typeName = "work";
+		dataKind.typeList.add(dataType);
+		
+		dataKind.factoryHandler = new PhoneNumberFactory();
+		
+		mDataKinds.add(dataKind);
+	}
+	
 	/**
 	 * email
 	 * */
@@ -271,6 +300,10 @@ public class BaseContactType {
 					contentValues.put(Data.RAW_CONTACT_ID, rawContactId);
 					contentValues.put(Data.MIMETYPE, dataKind.mimetype);
 					contentValues.put(dataKind.columnName, ifactoryHandler.createFirstRandomData());
+					if (!TextUtils.isEmpty(dataKind.typeColumn)) {
+						ArrayList<DataType> dataTypies = dataKind.typeList;
+						contentValues.put(dataKind.typeColumn, dataTypies.get(0).type);
+					}
 					
 					if (!TextUtils.isEmpty(dataKind.secondTypeColumn)) {
 						contentValues.put(dataKind.secondTypeColumn, ifactoryHandler.createSecondRandomData());
@@ -307,6 +340,64 @@ public class BaseContactType {
 						}
 					}
 				}
+			}
+		}
+		
+		return operationList;
+	}
+	
+	public ArrayList<ContentProviderOperation> buildRepeatContentValues(ArrayList<Long> rawContactIds, boolean repeatAllowed){
+		ArrayList<ContentProviderOperation> operationList = new ArrayList<ContentProviderOperation>();
+		ArrayList<ContentValues> contentValuesList = new ArrayList<ContentValues>();
+		for (DataKind dataKind : mDataKinds) {
+			int typeOverallMax = dataKind.typeOverallMax;
+			IFactory ifactoryHandler = dataKind.factoryHandler;
+			if (ifactoryHandler != null) {
+				if (typeOverallMax == 1) {
+					ContentValues contentValues = new ContentValues();
+					contentValues.put(Data.MIMETYPE, dataKind.mimetype);
+					contentValues.put(dataKind.columnName, ifactoryHandler.createFirstRandomData());
+					
+					if (!TextUtils.isEmpty(dataKind.secondTypeColumn)) {
+						contentValues.put(dataKind.secondTypeColumn, ifactoryHandler.createSecondRandomData());
+					}
+					
+					contentValuesList.add(contentValues);
+				} else {
+					ArrayList<DataType> dataTypies = dataKind.typeList;
+					if (dataTypies != null) {
+						String[] datas = ifactoryHandler.createFirstRandomData(dataTypies.size(), repeatAllowed);
+						if (datas != null) {
+							for (int i=0; i<datas.length;) {
+								ContentValues contentValues = new ContentValues();
+								contentValues.put(Data.MIMETYPE, dataKind.mimetype);
+								DataType dataType = dataTypies.get(i);
+								contentValues.put(dataKind.columnName, datas[i]);
+								contentValues.put(dataKind.typeColumn, dataType.type);
+								
+								if (!TextUtils.isEmpty(dataKind.secondTypeColumn)) {
+									contentValues.put(dataKind.secondTypeColumn, ifactoryHandler.createSecondRandomData());
+								}
+								
+								contentValuesList.add(contentValues);
+								i++;
+								if(i >= typeOverallMax) {
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		for (long rawContactId : rawContactIds) {
+			for (ContentValues contentValues : contentValuesList) {
+				contentValues.put(Data.RAW_CONTACT_ID, rawContactId);
+				
+				ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(Data.CONTENT_URI);
+				builder.withValues(contentValues);
+				operationList.add(builder.build());
 			}
 		}
 		

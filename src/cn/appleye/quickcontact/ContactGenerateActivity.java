@@ -134,15 +134,17 @@ public class ContactGenerateActivity extends Activity implements Callback{
 			new Thread() {
 				public void run() {
 					ArrayList<ContentProviderOperation> operationList = new ArrayList<ContentProviderOperation>();
-					for (int i=0; i< count; i++) {
+					ArrayList<ContentProviderOperation> perOperationList = null;
+					
+					if (mIsSameContactRepeat) {
 						BaseContactType baseContactType = new BaseContactType();
 						baseContactType.clear();
 						if (mIsSimpleInfo) {
 							baseContactType.addDataKindStructuredName();
-							baseContactType.addDataKindPhone();
+							baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
 						} else {
 							baseContactType.addDataKindStructuredName();
-							baseContactType.addDataKindPhone();
+							baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
 							baseContactType.addDataKindEmail();
 							baseContactType.addDataKindIm();
 							baseContactType.addDataKindNickname();
@@ -152,33 +154,99 @@ public class ContactGenerateActivity extends Activity implements Callback{
 							baseContactType.addDataKindStructuredPostal();
 						}
 						
-						Uri uri = RawContacts.CONTENT_URI;
-						long rawContactId = ContentUris.parseId(getContentResolver().insert(uri, new ContentValues()));
+						ArrayList<Long> rawContactIds = new ArrayList<Long>();
+						int realCount = 0;
+						for (int i=0; i< count; i++) {
+							Uri uri = RawContacts.CONTENT_URI;
+							long rawContactId = ContentUris.parseId(getContentResolver().insert(uri, new ContentValues()));
+							rawContactIds.add(rawContactId);
+							
+							realCount++;
+							if (mCancel) {
+								break;
+							}
+						}
 						
-						ArrayList<ContentProviderOperation> perOperationList = baseContactType.buildContentValues(rawContactId, mIsMultiNumberAllowed);
-
-						if (operationList.size() + perOperationList.size() >= 500) {
+						perOperationList = baseContactType.buildRepeatContentValues(rawContactIds, true);
+						
+						int processedCount = 0, step = (int)(perOperationList.size()/realCount);
+						for (ContentProviderOperation operation : perOperationList) {
+							operationList.add(operation);
+							
+							if (operationList.size() >= 498) {
+								try{
+									getContentResolver().applyBatch(ContactsContract.AUTHORITY, operationList);
+									operationList.clear();
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+								
+								mLoadingDialog.setProgress(processedCount/step);
+							}
+							
+							processedCount ++ ;
+						}
+						
+						if (operationList.size() != 0) {
 							try{
 								getContentResolver().applyBatch(ContactsContract.AUTHORITY, operationList);
 								operationList.clear();
-								
-								getContentResolver().applyBatch(ContactsContract.AUTHORITY, perOperationList);
-								perOperationList.clear();
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-						} else {
-							operationList.addAll(perOperationList);
+							
+							processedCount = processedCount+operationList.size();
+							mLoadingDialog.setProgress(realCount);
 						}
-						
-						if (i%4 == 0) {
-							mLoadingDialog.setProgress(i+1);
-						}
-						
-						if (mCancel) {
-							break;
+					} else {
+						for (int i=0; i< count; i++) {
+							BaseContactType baseContactType = new BaseContactType();
+							baseContactType.clear();
+
+							if (mIsSimpleInfo) {
+								baseContactType.addDataKindStructuredName();
+								baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
+							} else {
+								baseContactType.addDataKindStructuredName();
+								baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
+								baseContactType.addDataKindEmail();
+								baseContactType.addDataKindIm();
+								baseContactType.addDataKindNickname();
+								baseContactType.addDataKindNote();
+								baseContactType.addDataKindOrganization();
+								baseContactType.addDataKindWebsite();
+								baseContactType.addDataKindStructuredPostal();
+							}
+							
+							Uri uri = RawContacts.CONTENT_URI;
+							long rawContactId = ContentUris.parseId(getContentResolver().insert(uri, new ContentValues()));
+							
+							perOperationList = baseContactType.buildContentValues(rawContactId, true);
+
+							if (operationList.size() + perOperationList.size() >= 500) {
+								try{
+									getContentResolver().applyBatch(ContactsContract.AUTHORITY, operationList);
+									operationList.clear();
+									
+									getContentResolver().applyBatch(ContactsContract.AUTHORITY, perOperationList);
+									perOperationList.clear();
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							} else {
+								operationList.addAll(perOperationList);
+							}
+							
+							if (i%4 == 0) {
+								mLoadingDialog.setProgress(i+1);
+							}
+							
+							if (mCancel) {
+								break;
+							}
 						}
 					}
+					
 					if (!mCancel && operationList.size() > 0) {
 						try{
 							getContentResolver().applyBatch(ContactsContract.AUTHORITY, operationList);
