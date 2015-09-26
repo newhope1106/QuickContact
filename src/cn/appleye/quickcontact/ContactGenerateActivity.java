@@ -136,24 +136,24 @@ public class ContactGenerateActivity extends Activity implements Callback{
 					ArrayList<ContentProviderOperation> operationList = new ArrayList<ContentProviderOperation>();
 					ArrayList<ContentProviderOperation> perOperationList = null;
 					
+					BaseContactType baseContactType = new BaseContactType();
+					baseContactType.clear();
+
+					if (mIsSimpleInfo) {
+						baseContactType.addDataKindStructuredName();
+						baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
+					} else {
+						baseContactType.addDataKindStructuredName();
+						baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
+						baseContactType.addDataKindEmail();
+						baseContactType.addDataKindIm();
+						baseContactType.addDataKindNickname();
+						baseContactType.addDataKindNote();
+						baseContactType.addDataKindOrganization();
+						baseContactType.addDataKindWebsite();
+						baseContactType.addDataKindStructuredPostal();
+					}
 					if (mIsSameContactRepeat) {
-						BaseContactType baseContactType = new BaseContactType();
-						baseContactType.clear();
-						if (mIsSimpleInfo) {
-							baseContactType.addDataKindStructuredName();
-							baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
-						} else {
-							baseContactType.addDataKindStructuredName();
-							baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
-							baseContactType.addDataKindEmail();
-							baseContactType.addDataKindIm();
-							baseContactType.addDataKindNickname();
-							baseContactType.addDataKindNote();
-							baseContactType.addDataKindOrganization();
-							baseContactType.addDataKindWebsite();
-							baseContactType.addDataKindStructuredPostal();
-						}
-						
 						ArrayList<Long> rawContactIds = new ArrayList<Long>();
 						int realCount = 0;
 						for (int i=0; i< count; i++) {
@@ -200,24 +200,6 @@ public class ContactGenerateActivity extends Activity implements Callback{
 						}
 					} else {
 						for (int i=0; i< count; i++) {
-							BaseContactType baseContactType = new BaseContactType();
-							baseContactType.clear();
-
-							if (mIsSimpleInfo) {
-								baseContactType.addDataKindStructuredName();
-								baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
-							} else {
-								baseContactType.addDataKindStructuredName();
-								baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
-								baseContactType.addDataKindEmail();
-								baseContactType.addDataKindIm();
-								baseContactType.addDataKindNickname();
-								baseContactType.addDataKindNote();
-								baseContactType.addDataKindOrganization();
-								baseContactType.addDataKindWebsite();
-								baseContactType.addDataKindStructuredPostal();
-							}
-							
 							Uri uri = RawContacts.CONTENT_URI;
 							long rawContactId = ContentUris.parseId(getContentResolver().insert(uri, new ContentValues()));
 							
