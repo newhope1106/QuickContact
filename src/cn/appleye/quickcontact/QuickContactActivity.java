@@ -88,9 +88,22 @@ public class QuickContactActivity extends Activity implements LoaderCallbacks<Cu
 				startGenerateActivity();
 			}
 		});
+        
+        mSettingsView.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startSettingsActivity();
+			}
+		});
 	}
 	
 	private void startGenerateActivity() {
+		final Intent intent = new Intent(this, ContactGenerateActivity.class);
+		startActivity(intent);
+	}
+	
+	private void startSettingsActivity() {
 		final Intent intent = new Intent(this, ContactGenerateActivity.class);
 		startActivity(intent);
 	}
