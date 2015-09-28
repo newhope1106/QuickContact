@@ -346,6 +346,14 @@ public class BaseContactType {
 		return operationList;
 	}
 	
+	public int getDataKindSize() {
+		if (mDataKinds != null) {
+			return mDataKinds.size();
+		}
+		
+		return 0;
+	}
+	
 	public ArrayList<ContentProviderOperation> buildRepeatContentValues(ArrayList<Long> rawContactIds, boolean repeatAllowed){
 		ArrayList<ContentProviderOperation> operationList = new ArrayList<ContentProviderOperation>();
 		ArrayList<ContentValues> contentValuesList = new ArrayList<ContentValues>();

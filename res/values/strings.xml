@@ -40,4 +40,6 @@
     <string name="generate_note">generate note</string>
     <string name="generate_web_site">generate web site</string>
     <string name="save_success">save success</string>
+    
+    <string name="nothing_generate">nothing will be generated, please check settings</string>
 </resources>

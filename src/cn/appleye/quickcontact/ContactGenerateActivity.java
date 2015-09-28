@@ -6,11 +6,13 @@ import android.app.Activity;
 import android.content.ContentProviderOperation;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.RawContacts;
 import android.text.TextUtils;
@@ -21,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import cn.appleye.quickcontact.common.model.BaseContactType;
+import cn.appleye.quickcontact.utils.SettingsUtils;
 import cn.appleye.quickcontact.widget.CheckableTextView;
 import cn.appleye.quickcontact.widget.ClickableTextView;
 import cn.appleye.quickcontact.widget.ProgressDialogEx;
@@ -121,8 +124,72 @@ public class ContactGenerateActivity extends Activity implements Callback{
 		mSameRepeatCheckbox.setChecked(false);
 	}
 	
+	private BaseContactType createBaseContactType() {
+		BaseContactType baseContactType = new BaseContactType();
+		baseContactType.clear();
+		
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean value;
+
+		value = pref.getBoolean(SettingsUtils.PRE_KEY_DISPLAY_NAME, true);
+		if (value) {
+			baseContactType.addDataKindStructuredName();
+		}
+		
+		value = pref.getBoolean(SettingsUtils.PRE_KEY_PNONE_NUMBER, true);
+		if (value) {
+			baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
+		}
+
+		if (!mIsSimpleInfo){
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_EMAIL, false);
+			if (value) {
+				baseContactType.addDataKindEmail();
+			}
+			
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_IM, false);
+			if (value) {
+				baseContactType.addDataKindIm();
+			}
+			
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_NICK_NAME, false);
+			if (value) {
+				baseContactType.addDataKindNickname();
+			}
+			
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_NOTE, false);
+			if (value) {
+				baseContactType.addDataKindNote();
+			}
+			
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_ORG, false);
+			if (value) {
+				baseContactType.addDataKindOrganization();
+			}
+			
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_WEBSITE, false);
+			if (value) {
+				baseContactType.addDataKindWebsite();
+			}
+			
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_POSTAL, false);
+			if (value) {
+				baseContactType.addDataKindStructuredPostal();
+			}
+		}
+		
+		return baseContactType;
+	}
+	
 	private void startGenerate(String countText) {
 		try{
+			final BaseContactType baseContactType = createBaseContactType();
+			
+			if(baseContactType.getDataKindSize() <= 0) {
+				Toast.makeText(this, R.string.nothing_generate, Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
 			final int count = Integer.parseInt(countText);
 			
 			showLoadingDialog();
@@ -135,24 +202,7 @@ public class ContactGenerateActivity extends Activity implements Callback{
 				public void run() {
 					ArrayList<ContentProviderOperation> operationList = new ArrayList<ContentProviderOperation>();
 					ArrayList<ContentProviderOperation> perOperationList = null;
-					
-					BaseContactType baseContactType = new BaseContactType();
-					baseContactType.clear();
 
-					if (mIsSimpleInfo) {
-						baseContactType.addDataKindStructuredName();
-						baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
-					} else {
-						baseContactType.addDataKindStructuredName();
-						baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
-						baseContactType.addDataKindEmail();
-						baseContactType.addDataKindIm();
-						baseContactType.addDataKindNickname();
-						baseContactType.addDataKindNote();
-						baseContactType.addDataKindOrganization();
-						baseContactType.addDataKindWebsite();
-						baseContactType.addDataKindStructuredPostal();
-					}
 					if (mIsSameContactRepeat) {
 						ArrayList<Long> rawContactIds = new ArrayList<Long>();
 						int realCount = 0;
