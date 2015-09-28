@@ -27,4 +27,6 @@
     
     <string name="message_generate_finish">finish</string>
     <string name="message_generate_cancel">cancel</string>
+    
+    <string name="settings_title">Settings</string>
 </resources>

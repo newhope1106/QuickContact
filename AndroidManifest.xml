@@ -31,6 +31,11 @@
             android:label="@string/contacts_generate"
             android:windowSoftInputMode="adjustPan|stateHidden" >   
         </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/contacts_generate"
+            android:windowSoftInputMode="adjustPan|stateHidden" >   
+        </activity>
     </application>
 
 </manifest>

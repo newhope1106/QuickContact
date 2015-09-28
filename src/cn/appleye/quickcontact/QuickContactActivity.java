@@ -104,7 +104,7 @@ public class QuickContactActivity extends Activity implements LoaderCallbacks<Cu
 	}
 	
 	private void startSettingsActivity() {
-		final Intent intent = new Intent(this, ContactGenerateActivity.class);
+		final Intent intent = new Intent(this, SettingsActivity.class);
 		startActivity(intent);
 	}
 	
