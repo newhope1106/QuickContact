@@ -39,4 +39,5 @@
     <string name="generate_photo">生成头像</string>
     <string name="generate_note">生成备注</string>
     <string name="generate_web_site">生成网址</string>
+    <string name="save_success">保存成功</string>
 </resources>
