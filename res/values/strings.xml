@@ -42,4 +42,5 @@
     <string name="save_success">save success</string>
     
     <string name="nothing_generate">nothing will be generated, please check settings</string>
+    <string name="follow_settings_hint">Set the build options in settings activity</string>
 </resources>
