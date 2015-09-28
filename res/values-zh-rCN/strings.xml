@@ -43,4 +43,6 @@
     
     <string name="nothing_generate">没有什么要生成的，请检查设置信息</string>
     <string name="follow_settings_hint">设置界面可以设定生成选项</string>
+    
+    <string name="keyback_hint">再按一次退出程序</string>
 </resources>

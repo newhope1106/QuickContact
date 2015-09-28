@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 import cn.appleye.quickcontact.common.ListAdapter;
 
 public class QuickContactActivity extends Activity implements LoaderCallbacks<Cursor>{
@@ -38,6 +39,9 @@ public class QuickContactActivity extends Activity implements LoaderCallbacks<Cu
 	private SlidingMenu mSlideMenu;
 	
 	private static final int LOADER_ID = 1;
+	
+	/* 两次返回键之间的间隔 */
+	private long exitTime = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -172,11 +176,23 @@ public class QuickContactActivity extends Activity implements LoaderCallbacks<Cu
 		return cursorLoader;
 	}
 	
+	public void exit() {
+		if ((System.currentTimeMillis() - exitTime) > 1000) {
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.keyback_hint), Toast.LENGTH_SHORT)
+					.show();
+			exitTime = System.currentTimeMillis();
+		} else {
+			finish();
+			System.exit(0);
+		}
+	}
+	
 	public void onBackPressed() {
 		if (mSlideMenu.isMenuShowing()) {
 			mSlideMenu.toggle();
 		} else {
-			super.onBackPressed();
+			exit();
 		}
 	}
 	
