@@ -16,5 +16,5 @@
 	    android:layout_marginBottom="10dp"
 	    android:textColor="#ecf0f1"  
 	    android:textSize="18sp"
-	    android:text="@string/ok"/>
+	    android:text="@string/save"/>
 </LinearLayout>

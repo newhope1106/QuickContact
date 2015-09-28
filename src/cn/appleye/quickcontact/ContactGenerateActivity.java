@@ -142,37 +142,37 @@ public class ContactGenerateActivity extends Activity implements Callback{
 		}
 
 		if (!mIsSimpleInfo){
-			value = pref.getBoolean(SettingsUtils.PRE_KEY_EMAIL, false);
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_EMAIL, true);
 			if (value) {
 				baseContactType.addDataKindEmail();
 			}
 			
-			value = pref.getBoolean(SettingsUtils.PRE_KEY_IM, false);
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_IM, true);
 			if (value) {
 				baseContactType.addDataKindIm();
 			}
 			
-			value = pref.getBoolean(SettingsUtils.PRE_KEY_NICK_NAME, false);
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_NICK_NAME, true);
 			if (value) {
 				baseContactType.addDataKindNickname();
 			}
 			
-			value = pref.getBoolean(SettingsUtils.PRE_KEY_NOTE, false);
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_NOTE, true);
 			if (value) {
 				baseContactType.addDataKindNote();
 			}
 			
-			value = pref.getBoolean(SettingsUtils.PRE_KEY_ORG, false);
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_ORG, true);
 			if (value) {
 				baseContactType.addDataKindOrganization();
 			}
 			
-			value = pref.getBoolean(SettingsUtils.PRE_KEY_WEBSITE, false);
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_WEBSITE, true);
 			if (value) {
 				baseContactType.addDataKindWebsite();
 			}
 			
-			value = pref.getBoolean(SettingsUtils.PRE_KEY_POSTAL, false);
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_POSTAL, true);
 			if (value) {
 				baseContactType.addDataKindStructuredPostal();
 			}

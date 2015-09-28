@@ -40,6 +40,7 @@
     <string name="generate_note">生成备注</string>
     <string name="generate_web_site">生成网址</string>
     <string name="save_success">保存成功</string>
+    <string name="save">保存</string>
     
     <string name="nothing_generate">没有什么要生成的，请检查设置信息</string>
     <string name="follow_settings_hint">设置界面可以设定生成选项</string>
