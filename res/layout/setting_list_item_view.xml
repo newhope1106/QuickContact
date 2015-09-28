@@ -1,0 +1,11 @@
+<cn.appleye.quickcontact.widget.CheckableTextView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/display_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="8dip"
+    android:paddingTop="8dip"
+    android:paddingRight="8dip"
+    android:paddingBottom="8dip"
+    android:textSize="20sp"/>
