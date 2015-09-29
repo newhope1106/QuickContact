@@ -8,7 +8,6 @@ import android.widget.TextView;
 import cn.appleye.quickcontact.R;
 
 public class SettingsListItemView extends TextView{
-private int mNormalColor = 0xffecf0f1;
 	
 	private boolean mIsChecked = false;
 	private Drawable mCheckDrawable;
@@ -20,22 +19,19 @@ private int mNormalColor = 0xffecf0f1;
 	
 	public SettingsListItemView(Context context) {
 		super(context);
-		setBackgroundColor(mNormalColor);
 		
 		mContext = context;
 	}
 	
 	public SettingsListItemView(Context context, AttributeSet attrs){
 		super(context, attrs);
-		setBackgroundColor(mNormalColor);
 		
 		mContext = context;
 	}
 	
 	public SettingsListItemView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-		setBackgroundColor(mNormalColor);
-		
+
 		mContext = context;
 	}
 	

@@ -8,4 +8,4 @@
     android:paddingTop="8dip"
     android:paddingRight="8dip"
     android:paddingBottom="8dip"
-    android:textSize="20sp"/>
+    android:textSize="18sp"/>
