@@ -3,32 +3,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EEEEEE"
-    android:gravity="center|center_vertical|center_horizontal"
+    android:gravity="center|center_horizontal"
     android:orientation="vertical">
-    <TextView
-        android:id="@+id/settings_view"
+    <ImageView
+        android:layout_width="@dimen/mark_size"
+        android:layout_height="@dimen/mark_size"
+        android:layout_marginTop="40dip"
+        android:src="@drawable/mark"/>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:paddingTop="10dip"
-        android:paddingBottom="10dip"
-        android:text="@string/settings"
-        android:textColor="@color/list_item_text_color"
-        android:background="@drawable/bg_item" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:background="#EEEEEE" />
-    <TextView
-        android:id="@+id/slide_generate_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:paddingTop="10dip"
-        android:paddingBottom="10dip"
-        android:text="@string/contacts_generate"
-        android:textColor="@color/list_item_text_color"
-        android:background="@drawable/bg_item"  />
+        android:layout_height="0dip"
+        android:layout_weight="1" 
+        android:gravity="center|center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginBottom="50dip">
+        <TextView
+	        android:id="@+id/settings_view"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:textSize="20sp"
+	        android:paddingTop="10dip"
+	        android:paddingBottom="10dip"
+	        android:text="@string/settings"
+	        android:textColor="@color/list_item_text_color"
+	        android:background="@drawable/bg_item" />
+	    <TextView
+	        android:layout_width="match_parent"
+	        android:layout_height="1dip"
+	        android:background="#EEEEEE" />
+	    <TextView
+	        android:id="@+id/slide_generate_view"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:textSize="20sp"
+	        android:paddingTop="10dip"
+	        android:paddingBottom="10dip"
+	        android:text="@string/contacts_generate"
+	        android:textColor="@color/list_item_text_color"
+	        android:background="@drawable/bg_item"  />
+    </LinearLayout>
+    
 </LinearLayout>

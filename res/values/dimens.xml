@@ -6,4 +6,5 @@
     <dimen name="shadow_width">8dp</dimen>
     <dimen name="slidingmenu_offset">100dp</dimen>
 
+    <dimen name="mark_size">104dip</dimen>
 </resources>
