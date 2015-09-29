@@ -18,9 +18,11 @@
         android:id="@+id/display_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dip"
-        android:layout_marginTop="8dip"
-        android:layout_marginRight="8dip"
-        android:layout_marginBottom="8dip"
-        android:textSize="20sp"/>
+        android:paddingLeft="8dip"
+        android:paddingTop="8dip"
+        android:paddingRight="8dip"
+        android:paddingBottom="8dip"
+        android:textSize="20sp"
+        android:textColor="@color/list_item_text_color"
+        android:background="@drawable/bg_item"/>
 </LinearLayout>
