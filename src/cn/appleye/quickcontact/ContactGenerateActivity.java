@@ -140,6 +140,11 @@ public class ContactGenerateActivity extends Activity implements Callback{
 		if (value) {
 			baseContactType.addDataKindPhone(mIsMultiNumberAllowed?3:1);
 		}
+		
+		value = pref.getBoolean(SettingsUtils.PRE_KEY_PHOTO, true);
+		if (value) {
+			baseContactType.addDataKindPhoto();
+		}
 
 		if (!mIsSimpleInfo){
 			value = pref.getBoolean(SettingsUtils.PRE_KEY_EMAIL, true);
@@ -253,7 +258,7 @@ public class ContactGenerateActivity extends Activity implements Callback{
 							Uri uri = RawContacts.CONTENT_URI;
 							long rawContactId = ContentUris.parseId(getContentResolver().insert(uri, new ContentValues()));
 							
-							perOperationList = baseContactType.buildContentValues(rawContactId, true);
+							perOperationList = baseContactType.buildContentValues(ContactGenerateActivity.this, rawContactId, true);
 
 							if (operationList.size() + perOperationList.size() >= 500) {
 								try{

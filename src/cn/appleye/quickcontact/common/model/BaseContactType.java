@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
+import android.content.Context;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Im;
@@ -26,6 +27,7 @@ import cn.appleye.quickcontact.common.factory.NicknameFactory;
 import cn.appleye.quickcontact.common.factory.NoteFactory;
 import cn.appleye.quickcontact.common.factory.OrganizationFactory;
 import cn.appleye.quickcontact.common.factory.PhoneNumberFactory;
+import cn.appleye.quickcontact.common.factory.PhotoFactory;
 import cn.appleye.quickcontact.common.factory.StructuredPostalFactory;
 import cn.appleye.quickcontact.common.factory.WebsiteFactory;
 
@@ -252,6 +254,7 @@ public class BaseContactType {
 		dataKind.mimetype = Photo.CONTENT_ITEM_TYPE;
 		dataKind.columnName = Photo.PHOTO;
 		dataKind.typeOverallMax = 1;
+		dataKind.factoryHandler = new PhotoFactory();
 		
 		mDataKinds.add(dataKind);
 	}
@@ -289,7 +292,7 @@ public class BaseContactType {
 		mDataKinds.add(dataKind);
 	}
 	
-	public ArrayList<ContentProviderOperation> buildContentValues(long rawContactId, boolean repeatAllowed){
+	public ArrayList<ContentProviderOperation> buildContentValues(Context context, long rawContactId, boolean repeatAllowed){
 		ArrayList<ContentProviderOperation> operationList = new ArrayList<ContentProviderOperation>();
 		for (DataKind dataKind : mDataKinds) {
 			int typeOverallMax = dataKind.typeOverallMax;
@@ -299,12 +302,22 @@ public class BaseContactType {
 					ContentValues contentValues = new ContentValues();
 					contentValues.put(Data.RAW_CONTACT_ID, rawContactId);
 					contentValues.put(Data.MIMETYPE, dataKind.mimetype);
-					contentValues.put(dataKind.columnName, ifactoryHandler.createFirstRandomData());
+					
+					if (Photo.CONTENT_ITEM_TYPE.equals(dataKind.mimetype)) {
+						PhotoFactory photoFactory = (PhotoFactory)ifactoryHandler;
+						
+						if (photoFactory != null) {
+							contentValues.put(dataKind.columnName, photoFactory.createRandomPhoto(context));
+						}
+					} else {
+						contentValues.put(dataKind.columnName, ifactoryHandler.createFirstRandomData());
+					}
+					
 					if (!TextUtils.isEmpty(dataKind.typeColumn)) {
 						ArrayList<DataType> dataTypies = dataKind.typeList;
 						contentValues.put(dataKind.typeColumn, dataTypies.get(0).type);
 					}
-					
+
 					if (!TextUtils.isEmpty(dataKind.secondTypeColumn)) {
 						contentValues.put(dataKind.secondTypeColumn, ifactoryHandler.createSecondRandomData());
 					}
