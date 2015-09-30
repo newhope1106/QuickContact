@@ -205,7 +205,27 @@ public class ListAdapter extends BaseAdapter{
 		displayNameView.setText(displayName);
 		
 		bindSectionHeader(convertView, position);
+		
+		if (mSearchMode) {
+			bindSnippetView(convertView, position, mCursor);
+		} else {
+			TextView snippetView = (TextView)convertView.findViewById(R.id.snippet_view);
+			snippetView.setVisibility(View.GONE);
+		}
+		
 		return convertView;
+	}
+	
+	private void bindSnippetView(View convertView, int position, Cursor cursor) {
+		String snippet = cursor.getString(SNIPPET);
+		
+		TextView snippetView = (TextView)convertView.findViewById(R.id.snippet_view);
+		if(!TextUtils.isEmpty(snippet)){
+			snippetView.setText(snippet);
+			snippetView.setVisibility(View.VISIBLE);
+		} else {
+			snippetView.setVisibility(View.GONE);
+		}
 	}
 	
 	protected void bindSectionHeader(View convertView, int position) {

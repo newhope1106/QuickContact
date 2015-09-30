@@ -25,4 +25,15 @@
         android:textSize="20sp"
         android:textColor="@color/list_item_text_color"
         android:background="@drawable/bg_item"/>
+    <TextView
+        android:id="@+id/snippet_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dip"
+        android:paddingTop="8dip"
+        android:paddingRight="8dip"
+        android:paddingBottom="8dip"
+        android:textSize="20sp"
+        android:textColor="@color/list_item_text_color"
+        android:background="@drawable/bg_item"/>
 </LinearLayout>
