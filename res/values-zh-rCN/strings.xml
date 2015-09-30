@@ -10,7 +10,7 @@
     <string name="settings">设置</string>
     
     <string name="simple_info">简单信息</string>
-    <string name="full_info">全信息</string>
+    <string name="multi_info">复杂信息</string>
     <string name="contacts_count">个数</string>
     
     <string name="multi_numbers">多个号码</string>
@@ -40,7 +40,7 @@
     <string name="generate_note">生成备注</string>
     <string name="generate_web_site">生成网址</string>
     <string name="save_success">保存成功</string>
-    <string name="save">保存</string>
+    <string name="save_settings">保存设置</string>
     
     <string name="nothing_generate">没有什么要生成的，请检查设置信息</string>
     <string name="follow_settings_hint">设置界面可以设定生成选项</string>

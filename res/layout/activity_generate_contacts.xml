@@ -48,7 +48,7 @@
                 android:gravity="center"
                 android:paddingTop="4dip"
                 android:paddingBottom="4dip"
-                android:text="@string/full_info"
+                android:text="@string/multi_info"
                 android:textColor="#16a085" />
         </LinearLayout>
         <cn.appleye.quickcontact.widget.ClearEditText
