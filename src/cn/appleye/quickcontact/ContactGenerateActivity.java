@@ -69,6 +69,22 @@ public class ContactGenerateActivity extends Activity implements Callback{
 	}
 	
 	private void setEventListener() {
+		mMultiNumberCheckbox.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mMultiNumberCheckbox.toggole();
+			}
+		});
+		
+		mSameRepeatCheckbox.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mSameRepeatCheckbox.toggole();
+			}
+		});
+		
 		mResetBtn.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
