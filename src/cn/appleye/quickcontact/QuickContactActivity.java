@@ -71,6 +71,9 @@ public class QuickContactActivity extends Activity implements LoaderCallbacks<Cu
 		startLoading();
 	}
 	
+	/**
+	 * 左滑菜单
+	 * */
 	private void setupSlideMenu() {
 		mSlideMenu = new SlidingMenu(this);
 		mSlideMenu.setMode(SlidingMenu.LEFT);
@@ -188,6 +191,9 @@ public class QuickContactActivity extends Activity implements LoaderCallbacks<Cu
 		}
 	}
 	
+	/**
+	 * 连续两个返回键退出
+	 * */
 	public void onBackPressed() {
 		if (mSlideMenu.isMenuShowing()) {
 			mSlideMenu.toggle();

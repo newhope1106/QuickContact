@@ -42,7 +42,7 @@ public class OrganizationFactory implements IFactory{
 			"Sun Life Financial","Saint-Gobain","Shinhan Financial Group","FacebookFacebook","SEB","Vivendi","Fresenius","ICICI Bank","Danone",
 			"CNP Assurances","Kinder Morgan","Directv","Fiat Chrysler Automobiles","NIKE","Central Japan Railway","EOGEOG Resources",
 			"Thermo Fisher Scientific","Linde","BCE","Sun Hung Kai Properties","Air Liquide","Hyundai Mobis","Bristol-Myers Squibb","Samsung Life Insurance",
-			"HCAHCA Holdings","Oversea-Chinese Banking","（）AbbVie","Tencent Holdings","Mitsubishi Electric","State Street"
+			"HCAHCA Holdings","Oversea-Chinese Banking","AbbVie","Tencent Holdings","Mitsubishi Electric","State Street"
 			,"Reckitt Benckiser Group","New China Life Insurance","Bank of Beijing","KIA Motors","American Electric","Johnson Controls",
 			"Svenska Handelsbanken","Henkel","WPPWPP","Raytheon","Inditex","Eaton","Fubon Financial","Power Corp of Canada","Swedbank",
 			"Accenture","BB&TBB&T","Cathay Financial","SingTel","PG&E","Cardinal Health","Old Mutual","Standard Bank Group",
@@ -60,7 +60,7 @@ public class OrganizationFactory implements IFactory{
 			"Sumitomo Mitsui Trust","Marathon Oil","Fuji Heavy Industries","Illinois Tool Works","Viacom","British Sky Broadcasting","Allied Irish Banks",
 			"Sampo","Charles Schwab","Royal Bank of Scotland","-NTPC","Citic Securities","Mitsui Fudosan","China Resources Land","ACSGrupo ACS",
 			"Midea Group Co. Ltd.","Principal Financial Group","CenturyLinkCenturyLink","Fujifilm Holdings","Pernod Ricard","Corning","VoyaVoya Financial",
-			"CSR","TalanxTalanx","Colgate-Palmolive","-Kimberly-Clark","Lenovo Group","AMP","Garanti Bank","Syngenta","CNH Industrial",
+			"CSR","TalanxTalanx","Colgate-Palmolive-Kimberly-Clark","Lenovo Group","AMP","Garanti Bank","Syngenta","CNH Industrial",
 			"Metallurgical Corp of China","JBSJBS","Komatsu","Sempra Energy","SKSK Telecom","Bank Rakyat Indonesia","Amazon.com","TJXTJX Cos",
 			"Starbucks","Aon","Associated British Foods","PPGPPG Industries","Public Service Enterprise Group","Sinohydro Group","TE Connectivity",
 			"Yahoo","E.ON","-Mitsubishi Estate","Swisscom","Orix","Philips","Consolidated Edison","Saudi Electricity","","China CNR","Fujitsu","Sony",

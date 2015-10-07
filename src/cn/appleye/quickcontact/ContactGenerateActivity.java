@@ -68,6 +68,9 @@ public class ContactGenerateActivity extends Activity implements Callback{
 		setEventListener();
 	}
 	
+	/**
+	 * 添加点击事件
+	 * */
 	private void setEventListener() {
 		mMultiNumberCheckbox.setOnClickListener(new View.OnClickListener() {
 			
@@ -140,6 +143,10 @@ public class ContactGenerateActivity extends Activity implements Callback{
 		mSameRepeatCheckbox.setChecked(false);
 	}
 	
+	/**
+	 * 根据设置选项，生成联系人信息，默认生成所有信息
+	 * 所有联系人默认生成姓名、号码、头像
+	 * */
 	private BaseContactType createBaseContactType() {
 		BaseContactType baseContactType = new BaseContactType();
 		baseContactType.clear();
@@ -202,6 +209,9 @@ public class ContactGenerateActivity extends Activity implements Callback{
 		return baseContactType;
 	}
 	
+	/**
+	 * 开始生成随机联系人
+	 * */
 	private void startGenerate(String countText) {
 		try{
 			final BaseContactType baseContactType = createBaseContactType();
@@ -224,7 +234,7 @@ public class ContactGenerateActivity extends Activity implements Callback{
 					ArrayList<ContentProviderOperation> operationList = new ArrayList<ContentProviderOperation>();
 					ArrayList<ContentProviderOperation> perOperationList = null;
 
-					if (mIsSameContactRepeat) {
+					if (mIsSameContactRepeat) {//只生成完全相同联系人
 						ArrayList<Long> rawContactIds = new ArrayList<Long>();
 						int realCount = 0;
 						for (int i=0; i< count; i++) {
@@ -244,7 +254,7 @@ public class ContactGenerateActivity extends Activity implements Callback{
 						for (ContentProviderOperation operation : perOperationList) {
 							operationList.add(operation);
 							
-							if (operationList.size() >= 498) {
+							if (operationList.size() >= 498) {//批处理一次最多500个
 								try{
 									getContentResolver().applyBatch(ContactsContract.AUTHORITY, operationList);
 									operationList.clear();

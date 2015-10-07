@@ -61,7 +61,7 @@ public class ListAdapter extends BaseAdapter{
 			Contacts._ID,
 			Contacts.DISPLAY_NAME_PRIMARY,
 			Contacts.LOOKUP_KEY,
-			SearchSnippets.SNIPPET
+			SearchSnippets.SNIPPET //搜索结果部分
 	};
 	
 	private static final int CONTACT_ID = 0;
@@ -228,6 +228,9 @@ public class ListAdapter extends BaseAdapter{
 		}
 	}
 	
+	/**
+	 * 每组第一个item显示字母头部
+	 * */
 	protected void bindSectionHeader(View convertView, int position) {
 		Placement placement = getItemPlacementInSection(position);
 		

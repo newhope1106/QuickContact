@@ -3,6 +3,9 @@ package cn.appleye.quickcontact.common.factory;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
+/**
+ * 随机生成中文名
+ * */
 public class ChinseNameFactory implements IFactory{
 	private static final String[] sSurname = {
 			"王","李","张","刘","陈","杨","黄","赵","吴","周", "徐","孙","马","朱","胡","林","郭",
