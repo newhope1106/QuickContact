@@ -6,7 +6,10 @@ import android.widget.TextView;
 
 public class ClickableTextView extends TextView{
 	private int mNormalColor = 0xffecf0f1;
-	private int mPressedColor = 0xff2ecc71;
+	private int mPressedColor = 0xff55CCC6;
+	
+	private int mTextNormalColor = 0xff16a085;
+	private int mTextPressedColor = 0xffffffff;
 	
 	private boolean mChecked = false;
 
@@ -30,8 +33,10 @@ public class ClickableTextView extends TextView{
 		
 		if (mChecked) {
 			setBackgroundColor(mPressedColor);
+			setTextColor(mTextPressedColor);
 		} else {
 			setBackgroundColor(mNormalColor);
+			setTextColor(mTextNormalColor);
 		}
 	}
 	
