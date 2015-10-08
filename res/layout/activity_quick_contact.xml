@@ -34,6 +34,7 @@
 	        android:paddingRight="4dip"
 	        android:layout_marginLeft="4dip"
 	        android:layout_marginRight="4dip"
+	        android:background="@null"
 	        android:hint="@string/search_hint" />
     </cn.appleye.quickcontact.widget.BorderLinearLayout>
     
