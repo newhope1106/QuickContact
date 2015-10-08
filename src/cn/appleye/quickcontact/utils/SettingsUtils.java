@@ -7,6 +7,8 @@ public class SettingsUtils {
 	
 	public static final String PRE_KEY_PNONE_NUMBER = "phone_number_allowed";
 	
+	public static final String PRE_KEY_EVENT = "event_allowed";
+	
 	public static final String PRE_KEY_EMAIL = "email_allowed";
 	
 	public static final String PRE_KEY_POSTAL = "postal_allowed";

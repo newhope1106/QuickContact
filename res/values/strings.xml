@@ -31,7 +31,8 @@
     <string name="settings_title">Settings</string>
     <string name="generate_display_name">generate display name</string>
     <string name="generate_nick_name">generate nick name</string>
-    <string name="generate_phone_number">generate phone_number</string>
+    <string name="generate_phone_number">generate phone number</string>
+    <string name="generate_event_number">generate event</string>
     <string name="generate_email">generate nick email</string>
     <string name="generate_postal">generate post</string>
     <string name="generate_im">generate IM</string>

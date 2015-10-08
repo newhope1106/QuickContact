@@ -170,6 +170,11 @@ public class ContactGenerateActivity extends Activity implements Callback{
 		}
 
 		if (!mIsSimpleInfo){
+			value = pref.getBoolean(SettingsUtils.PRE_KEY_EVENT, true);
+			if (value) {
+				baseContactType.addDataKindEvent();
+			}
+			
 			value = pref.getBoolean(SettingsUtils.PRE_KEY_EMAIL, true);
 			if (value) {
 				baseContactType.addDataKindEmail();

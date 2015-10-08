@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.provider.ContactsContract.CommonDataKinds.Nickname;
 import android.provider.ContactsContract.CommonDataKinds.Note;
@@ -21,6 +22,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import cn.appleye.quickcontact.common.factory.ChinseNameFactory;
 import cn.appleye.quickcontact.common.factory.EmailFactory;
+import cn.appleye.quickcontact.common.factory.EventFactory;
 import cn.appleye.quickcontact.common.factory.IFactory;
 import cn.appleye.quickcontact.common.factory.ImFactory;
 import cn.appleye.quickcontact.common.factory.NicknameFactory;
@@ -125,6 +127,33 @@ public class BaseContactType {
 		dataKind.typeList.add(dataType);
 		
 		dataKind.factoryHandler = new PhoneNumberFactory();
+		
+		mDataKinds.add(dataKind);
+	}
+	
+	/**
+	 * 事件(生日或周年纪念)
+	 * */
+	public void addDataKindEvent() {
+		DataKind dataKind = new DataKind();
+		dataKind.mimetype = Event.CONTENT_ITEM_TYPE;
+		dataKind.typeOverallMax = 2;
+		dataKind.columnName = Event.START_DATE;
+		dataKind.typeColumn = Event.DATA2;
+		
+		dataKind.typeList = new ArrayList<DataType>();
+		
+		DataType dataType = new DataType();
+		dataType.type = Event.TYPE_BIRTHDAY;
+		dataType.typeName = "birthday";
+		dataKind.typeList.add(dataType);
+		
+		dataType = new DataType();
+		dataType.type = Event.TYPE_ANNIVERSARY;
+		dataType.typeName = "anniversary";
+		dataKind.typeList.add(dataType);
+		
+		dataKind.factoryHandler = new EventFactory();
 		
 		mDataKinds.add(dataKind);
 	}

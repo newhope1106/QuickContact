@@ -49,6 +49,7 @@ public class SettingsActivity extends Activity{
 		mEntries.add(new Entry(SettingsUtils.PRE_KEY_DISPLAY_NAME, getString(R.string.generate_display_name), true));
 		mEntries.add(new Entry(SettingsUtils.PRE_KEY_NICK_NAME, getString(R.string.generate_nick_name), true));
 		mEntries.add(new Entry(SettingsUtils.PRE_KEY_PNONE_NUMBER, getString(R.string.generate_phone_number), true));
+		mEntries.add(new Entry(SettingsUtils.PRE_KEY_EVENT, getString(R.string.generate_event_number), true));
 		mEntries.add(new Entry(SettingsUtils.PRE_KEY_EMAIL, getString(R.string.generate_email), true));
 		mEntries.add(new Entry(SettingsUtils.PRE_KEY_POSTAL, getString(R.string.generate_postal), true));
 		mEntries.add(new Entry(SettingsUtils.PRE_KEY_IM, getString(R.string.generate_im), true));
