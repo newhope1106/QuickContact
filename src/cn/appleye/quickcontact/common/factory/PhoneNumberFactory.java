@@ -2,42 +2,30 @@ package cn.appleye.quickcontact.common.factory;
 
 public class PhoneNumberFactory implements IFactory{
 	
-	//移动
-	private static String[] sMobile = new String[]{"134","135","136","137","138","139","150","151","157","158","159","187","188"};
+	private static final String[] sCountryPrefix = {
+			"0091",
+			"+91-"
+	};
 	
-	//联通
-	private static String[] sUnicom = new String[]{"130", "131", "132", "152", "155", "156", "185", "186"};
-	
-	//电信
-	private static String[] sTelecom = new String[]{"133" ,"153", "180", "189"};
-	
-	
-	public static String createOneRandomPhoneNumber(){
-		int carrieroperator = (int)(Math.random()*3);
+	private static final String[] sCityPrefix = {
+			"9", "8"
+	};
 
-		String telPrefix = "";
-		int i = 0;
-		switch(carrieroperator){
-			case 0:
-				i = (int)(Math.random()*sMobile.length);
-				telPrefix = sMobile[i];
-				break;
-				
-			case 1:
-				i = (int)(Math.random()*sUnicom.length);
-				telPrefix = sUnicom[i];
-				break;
-				
-			case 2:
-				i = (int)(Math.random()*sTelecom.length);
-				telPrefix = sTelecom[i];
-				break;
+	public static String createOneRandomPhoneNumber(){
+		String phoneNumber = "";
+		
+		if((int)(Math.random()*2) == 0) {
+			int index = (int)(Math.random()*sCountryPrefix.length);
+			phoneNumber += sCountryPrefix[index];
 		}
 		
-		StringBuffer tel = new StringBuffer(telPrefix);
+		int index = (int)(Math.random()*sCityPrefix.length);
+		phoneNumber += sCityPrefix[index];
 		
-		for (i = 0; i < 8; i++) {
-			tel.append((int) (Math.random() * 10));
+		StringBuffer tel = new StringBuffer(phoneNumber);
+		
+		for (int i = 0; i < 8; i++) {
+			tel.append((int) (Math.random() * 9));
 		}
 		
 		return tel.toString();

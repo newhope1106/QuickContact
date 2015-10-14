@@ -139,8 +139,8 @@ public class EnglishNameFactory implements IFactory{
 
 	@Override
 	public String createFirstRandomData() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return createRandomSecondName() + " " + createRandomFamilyName();
 	}
 
 	@Override

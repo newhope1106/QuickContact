@@ -20,8 +20,8 @@ import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.provider.ContactsContract.Data;
 import android.text.TextUtils;
 import android.util.Log;
-import cn.appleye.quickcontact.common.factory.ChinseNameFactory;
 import cn.appleye.quickcontact.common.factory.EmailFactory;
+import cn.appleye.quickcontact.common.factory.EnglishNameFactory;
 import cn.appleye.quickcontact.common.factory.EventFactory;
 import cn.appleye.quickcontact.common.factory.IFactory;
 import cn.appleye.quickcontact.common.factory.ImFactory;
@@ -53,7 +53,7 @@ public class BaseContactType {
 		dataKind.typeOverallMax = 1;
 		dataKind.columnName = StructuredName.DISPLAY_NAME;
 		
-		dataKind.factoryHandler = new ChinseNameFactory();
+		dataKind.factoryHandler = new EnglishNameFactory();
 		mDataKinds.add(dataKind);
 	}
 	
