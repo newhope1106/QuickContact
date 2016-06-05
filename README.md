@@ -1,4 +1,6 @@
 #QuickContact
+
+最新的代码请访问该地址(https://github.com/newhope1106/RandomContact)
 ###快速联系人
 ###功能
 1.显示已有联系人
